@@ -12,15 +12,16 @@ package quizproject;
  */
 public class Question extends Quiz{
     private int number, section;
-    private String text;
+    private String text, imgPath;
     private Answer[] answers;
 
     public Question() {
     }
 
-    public Question(int number, String text, int section) {
+    public Question(int number, String text, String imgPath, int section) {
         this.number = number;
         this.text = text;
+        this.imgPath = imgPath;
         this.section = section;
     }
 
@@ -31,7 +32,6 @@ public class Question extends Quiz{
     public void setAnswers(Answer[] answers) {
         this.answers = answers;
     }
-
     
     public void setNumber(int number) {
         this.number = number;
@@ -39,6 +39,10 @@ public class Question extends Quiz{
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
     }
 
     public int getNumber() {
@@ -51,6 +55,10 @@ public class Question extends Quiz{
 
     public Answer[] getAnswers() {
         return answers;
+    }
+
+    public String getImgPath() {
+        return imgPath;
     }
     
 }

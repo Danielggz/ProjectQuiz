@@ -16,8 +16,6 @@ public class QuizApp {
      */
     public static void main(String[] args) {
         // Load questions and answers
-        
-        
         QuizIntroGUI gui = new QuizIntroGUI();
         gui.setVisible(true);
     }

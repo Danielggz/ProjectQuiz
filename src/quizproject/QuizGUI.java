@@ -4,6 +4,13 @@
  */
 package quizproject;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -26,20 +33,29 @@ public class QuizGUI extends javax.swing.JFrame {
         quiz.loadQuestions();
         quiz.loadAnswers();
         
-        //first question
         question = quiz.questionList[questionCount];
         Answer ansA = question.getAnswers()[0];
         Answer ansB = question.getAnswers()[1];
         Answer ansC = question.getAnswers()[2];
         Answer ansD = question.getAnswers()[3];
 
-        //Load first question
+        //Load question and answers into gui
         lblQuestionTitle.setText("Question " + question.getNumber() + ": ");
-        lblQuestion.setText(question.getText());
+        txtareaQuestion.setText(question.getText());
         radAnswerA.setText(ansA.getText());
         radAnswerB.setText(ansB.getText());
         radAnswerC.setText(ansC.getText());
         radAnswerD.setText(ansD.getText());
+        //Load image
+        try{
+            BufferedImage bufferedImage = ImageIO.read(getClass().getResource("img/" + question.getImgPath()));
+            Image image = bufferedImage.getScaledInstance(375, 350, Image.SCALE_DEFAULT); 
+            ImageIcon icon = new ImageIcon(image);
+            lblImg.setIcon(icon);
+        }catch(IOException e){
+            System.out.println("Error in getting image: " + e);
+        }
+        
     }
 
     /**
@@ -53,7 +69,6 @@ public class QuizGUI extends javax.swing.JFrame {
 
         btnGroupAnswers = new javax.swing.ButtonGroup();
         lblQuestionTitle = new javax.swing.JLabel();
-        lblQuestion = new javax.swing.JLabel();
         btnNextQuestion = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
         radAnswerA = new javax.swing.JRadioButton();
@@ -65,15 +80,14 @@ public class QuizGUI extends javax.swing.JFrame {
         lblAnswerC = new javax.swing.JLabel();
         lblAnswerD = new javax.swing.JLabel();
         lblImg = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtareaQuestion = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quiz");
 
         lblQuestionTitle.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblQuestionTitle.setText("Question number");
-
-        lblQuestion.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblQuestion.setText("Question");
 
         btnNextQuestion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNextQuestion.setText("Next");
@@ -119,7 +133,15 @@ public class QuizGUI extends javax.swing.JFrame {
         lblAnswerD.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblAnswerD.setText("D.");
 
-        lblImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizproject/img/cat.jpg"))); // NOI18N
+        txtareaQuestion.setEditable(false);
+        txtareaQuestion.setColumns(5);
+        txtareaQuestion.setLineWrap(true);
+        txtareaQuestion.setRows(5);
+        txtareaQuestion.setWrapStyleWord(true);
+        txtareaQuestion.setAutoscrolls(false);
+        txtareaQuestion.setFocusable(false);
+        txtareaQuestion.setOpaque(false);
+        jScrollPane1.setViewportView(txtareaQuestion);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,10 +161,10 @@ public class QuizGUI extends javax.swing.JFrame {
                         .addComponent(lblAnswerD, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(radAnswerD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(lblQuestionTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(49, 49, 49)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblAnswerA, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -163,10 +185,10 @@ public class QuizGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblImg, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblQuestionTitle)
-                    .addComponent(lblQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(28, 28, 28)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblAnswerA)
                     .addComponent(radAnswerA))
@@ -188,9 +210,9 @@ public class QuizGUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(lblAnswerD, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(46, 46, 46))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -202,41 +224,63 @@ public class QuizGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNextQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextQuestionActionPerformed
-        //Load next question and save scores
-        
+        //Load next question and save answers
+        boolean selected = false; //boolean to determine if any of the options was selected
         //Save user answer
         if(radAnswerA.isSelected()){
             quiz.userAnswers.add(quiz.questionList[questionCount].getAnswers()[0].getOption());
+            selected = true;
         }else if(radAnswerB.isSelected()){
             quiz.userAnswers.add(quiz.questionList[questionCount].getAnswers()[1].getOption());
+            selected = true;
         }else if(radAnswerC.isSelected()){
             quiz.userAnswers.add(quiz.questionList[questionCount].getAnswers()[2].getOption());
+            selected = true;
         }else if(radAnswerD.isSelected()){
             quiz.userAnswers.add(quiz.questionList[questionCount].getAnswers()[3].getOption());
-        }
-        if(questionCount<14)
-        {
-            //Load next question
-            questionCount++; 
-            question = quiz.questionList[questionCount];
-            Answer ansA = question.getAnswers()[0];
-            Answer ansB = question.getAnswers()[1];
-            Answer ansC = question.getAnswers()[2];
-            Answer ansD = question.getAnswers()[3];
-
-            lblQuestionTitle.setText("Question " + question.getNumber() + ": ");
-            lblQuestion.setText(question.getText());
-            radAnswerA.setText(ansA.getText());
-            radAnswerB.setText(ansB.getText());
-            radAnswerC.setText(ansC.getText());
-            radAnswerD.setText(ansD.getText());
-            
+            selected = true;
         }else{
-            //Call to the results form
-            System.out.println(quiz.userAnswers.size());
-            for(int i=0; i<quiz.userAnswers.size(); i++)
+            //Display message that user can't go to next question until the current one is answered
+            selected = false;
+            JOptionPane.showMessageDialog(null, "Please select an option before continue");
+        }
+        if(selected)
+        {
+            if(questionCount<14)
             {
-                System.out.println("Question " + i + ": Answer " + quiz.userAnswers.get(i) );
+                //Load next question
+                questionCount++; 
+                question = quiz.questionList[questionCount];
+                Answer ansA = question.getAnswers()[0];
+                Answer ansB = question.getAnswers()[1];
+                Answer ansC = question.getAnswers()[2];
+                Answer ansD = question.getAnswers()[3];
+                //Load image
+                try{
+                    BufferedImage bufferedImage = ImageIO.read(getClass().getResource("img/" + question.getImgPath()));
+                    Image image = bufferedImage.getScaledInstance(375, 350, Image.SCALE_DEFAULT); 
+                    ImageIcon icon = new ImageIcon(image);
+                    lblImg.setIcon(icon);
+                }catch(IOException e){
+                    System.out.println("Error in getting image: " + e);
+                }
+
+                lblQuestionTitle.setText("Question " + question.getNumber() + ": ");
+                txtareaQuestion.setText(question.getText());
+                //Clear previous selection
+                btnGroupAnswers.clearSelection();
+                radAnswerA.setText(ansA.getText());
+                radAnswerB.setText(ansB.getText());
+                radAnswerC.setText(ansC.getText());
+                radAnswerD.setText(ansD.getText());
+
+            }else{
+                //Call to the results form
+                System.out.println(quiz.userAnswers.size());
+                for(int i=0; i<quiz.userAnswers.size(); i++)
+                {
+                    System.out.println("Question " + i + ": Answer " + quiz.userAnswers.get(i) );
+                }
             }
         }
     }//GEN-LAST:event_btnNextQuestionActionPerformed
@@ -286,16 +330,17 @@ public class QuizGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnExit;
     private javax.swing.ButtonGroup btnGroupAnswers;
     private javax.swing.JButton btnNextQuestion;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAnswerA;
     private javax.swing.JLabel lblAnswerB;
     private javax.swing.JLabel lblAnswerC;
     private javax.swing.JLabel lblAnswerD;
     private javax.swing.JLabel lblImg;
-    private javax.swing.JLabel lblQuestion;
     private javax.swing.JLabel lblQuestionTitle;
     private javax.swing.JRadioButton radAnswerA;
     private javax.swing.JRadioButton radAnswerB;
     private javax.swing.JRadioButton radAnswerC;
     private javax.swing.JRadioButton radAnswerD;
+    private javax.swing.JTextArea txtareaQuestion;
     // End of variables declaration//GEN-END:variables
 }

@@ -24,23 +24,23 @@ public class Quiz {
     public void loadQuestions(){
         //load questions into array
         questionList = new Question[15];
-        questionList[0] = new Question(1, "Which of the following is the biggest cause of global warming?", 1);
-        questionList[1] = new Question(2, "How much has sea level risen since 1900 (global average)?", 1);
-        questionList[2] = new Question(3, "What percentage of the earth’s atmosphere is comprised of carbon dioxide, the greenhouse gas?", 1);
-        questionList[3] = new Question(4, "Which of the following places has warmed the most, over the past 100 years?", 1);
-        questionList[4] = new Question(5, "What percentage of the world’s electricity came from wind and solar power?", 1);
+        questionList[0] = new Question(1, "Which of the following is the biggest cause of global warming?", "earth.jpg", 1);
+        questionList[1] = new Question(2, "How much has sea level risen since 1900 (global average)?", "glaciar.jpg", 1);
+        questionList[2] = new Question(3, "What percentage of the earth’s atmosphere is comprised of carbon dioxide, the greenhouse gas?", "atmosphere.jpg", 1);
+        questionList[3] = new Question(4, "Which of the following places has warmed the most, over the past 100 years?", "desert.jpg", 1);
+        questionList[4] = new Question(5, "What percentage of the world’s electricity came from wind and solar power?", "solarEnergy.jpg", 1);
         
-        questionList[5] = new Question(6, "What is the second leading cause of global warming after gas emmissions?", 2);
-        questionList[6] = new Question(7, "Which land-based ecosystem has the most biodiversity?", 2);
-        questionList[7] = new Question(8, "What is known as the \"Sixth Extinction\"?", 2);
-        questionList[8] = new Question(9, "Global forests removed how much of the global human fossil fuel emissions annually from 1990 to 2007?", 2);
-        questionList[9] = new Question(10, "How much of the Earth's land is covered by forests?", 2);
+        questionList[5] = new Question(6, "What is the second leading cause of global warming after gas emmissions?", "globalWarming.jpg", 2);
+        questionList[6] = new Question(7, "Which land-based ecosystem has the most biodiversity?", "biodiversity.jpg", 2);
+        questionList[7] = new Question(8, "What is known as the \"Sixth Extinction\"?", "dodo.jpg", 2);
+        questionList[8] = new Question(9, "Global forests removed how much of the global human fossil fuel emissions annually from 1990 to 2007?", "forests.jpg", 2);
+        questionList[9] = new Question(10, "How much of the Earth's land is covered by forests?", "moreforests.jpg", 2);
         
-        questionList[10] = new Question(11, "10,000 years ago, wild animals made up 99% of the weight of all vertebrates on Earth, and humans made up 1%. What is the composition of global vertebrate biomass today?", 3);
-        questionList[11] = new Question(12, "What is the percentage of dependance on pollinators of our crops?", 3);
-        questionList[12] = new Question(13, "How many times the current rate of extinction of species is bigger than would it would be at natural rate?", 3);
-        questionList[13] = new Question(14, "Which of these animal groups has the highest proportion of threatened species?", 3);
-        questionList[14] = new Question(15, "What is the main cause of the forest biodiversity?", 3);
+        questionList[10] = new Question(11, "10,000 years ago, wild animals made up 99% of the weight of all vertebrates on Earth, and humans made up 1%. What is the composition of global vertebrate biomass today?", "pigs.jpg", 3);
+        questionList[11] = new Question(12, "What is the percentage of dependance on pollinators of our crops?", "pollinator.jpg", 3);
+        questionList[12] = new Question(13, "How many times the current rate of extinction of species is bigger than would it would be at natural rate?", "Extinct-Animals.jpg", 3);
+        questionList[13] = new Question(14, "What is the main cause of the forest biodiversity loss?", "rabbit.jpg", 3);
+        questionList[14] = new Question(15, "Which of these animal groups has the highest proportion of threatened species?", "axolote.jpeg", 3);
     }
     
     public void loadAnswers(){

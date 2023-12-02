@@ -4,6 +4,9 @@
  */
 package quizproject;
 
+import java.awt.Color;
+import javax.swing.BorderFactory;
+
 /**
  *
  * @author Daniel García
@@ -15,6 +18,7 @@ public class QuizIntroGUI extends javax.swing.JFrame {
      */
     public QuizIntroGUI() {
         initComponents();
+        //txtareaSubtitle.setBorder(BorderFactory.createLineBorder(Color.RED));
     }
 
     /**
@@ -27,20 +31,16 @@ public class QuizIntroGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         lblTitle = new javax.swing.JLabel();
-        lblSubtitle = new javax.swing.JLabel();
         btnStart = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtareaSubtitle = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblTitle.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Welcome to the Quiz");
-
-        lblSubtitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblSubtitle.setText("This test will evaluate your knowledge of the causes and consequences of climate change. Good luck!");
 
         btnStart.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnStart.setText("Start test");
@@ -58,29 +58,37 @@ public class QuizIntroGUI extends javax.swing.JFrame {
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtareaSubtitle.setEditable(false);
+        txtareaSubtitle.setColumns(15);
+        txtareaSubtitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtareaSubtitle.setLineWrap(true);
+        txtareaSubtitle.setRows(5);
+        txtareaSubtitle.setText("This test will evaluate your knowledge of the causes and consequences of climate change. Good luck!");
+        txtareaSubtitle.setWrapStyleWord(true);
+        txtareaSubtitle.setFocusable(false);
+        txtareaSubtitle.setOpaque(false);
+        jScrollPane1.setViewportView(txtareaSubtitle);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(163, 163, 163)
+                        .addGap(189, 189, 189)
                         .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(247, 247, 247)
+                        .addGap(273, 273, 273)
                         .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(247, 247, 247)
-                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblSubtitle, javax.swing.GroupLayout.PREFERRED_SIZE, 663, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 663, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                        .addGap(273, 273, 273)
+                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(223, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,14 +96,12 @@ public class QuizIntroGUI extends javax.swing.JFrame {
                 .addGap(47, 47, 47)
                 .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(lblSubtitle, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(86, 86, 86)
                 .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         pack();
@@ -152,8 +158,7 @@ public class QuizIntroGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnStart;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JLabel lblSubtitle;
     private javax.swing.JLabel lblTitle;
+    private javax.swing.JTextArea txtareaSubtitle;
     // End of variables declaration//GEN-END:variables
 }
