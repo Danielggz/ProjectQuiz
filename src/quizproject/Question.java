@@ -25,8 +25,16 @@ public class Question extends Quiz{
         this.section = section;
     }
 
-    public void load(){
-        
+    public boolean checkAnswer(char option){
+        for(int i=0; i<this.answers.length; i++)
+        {
+            if(option == this.answers[i].getOption() && this.answers[i].isCorrect())
+            {
+                //If option is the same as the correct answer option returns true
+                return true;
+            }
+        }
+        return false;
     }
 
     public void setAnswers(Answer[] answers) {

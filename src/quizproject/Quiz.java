@@ -163,10 +163,4 @@ public class Quiz {
         return finalTime;
     }
     
-    public void startTimer(){
-    }
-    
-    public void stopTimer(){
-    }
-    
 }
