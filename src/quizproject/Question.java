@@ -11,14 +11,14 @@ package quizproject;
  * 1 dec 2023
  */
 public class Question extends Quiz{
-    private int number, section;
-    private String text, imgPath;
+    private int number;
+    private String text, imgPath, section;
     private Answer[] answers;
 
     public Question() {
     }
 
-    public Question(int number, String text, String imgPath, int section) {
+    public Question(int number, String text, String imgPath, String section) {
         this.number = number;
         this.text = text;
         this.imgPath = imgPath;
@@ -55,6 +55,10 @@ public class Question extends Quiz{
 
     public int getNumber() {
         return number;
+    }
+
+    public String getSection() {
+        return section;
     }
 
     public String getText() {

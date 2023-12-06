@@ -19,6 +19,9 @@ public class QuizIntroGUI extends javax.swing.JFrame {
     public QuizIntroGUI() {
         initComponents();
         
+        //Center form in screen
+        setLocationRelativeTo(null);
+        
         getContentPane().setBackground(Color.decode("#ACE1AF"));
         txtareaSubtitle.setBackground(Color.decode("#ACE1AF"));
         jScrollPane1.setBorder(null);

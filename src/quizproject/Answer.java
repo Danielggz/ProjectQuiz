@@ -24,10 +24,6 @@ public class Answer extends Quiz{
         this.text = text;
         this.isCorrect = isCorrect;
     }
-    
-    public void load(){
-        
-    }
 
     public char getOption() {
         return option;

@@ -30,6 +30,15 @@ public class QuizGUI extends javax.swing.JFrame {
     public QuizGUI() {
         initComponents();
         
+        //Create database
+        ManageDB dbConn = new ManageDB();
+        dbConn.createDB(); //Creates database if not exists
+        ManageDB.getConnection();
+        dbConn.createTables();
+        
+        //Center form in screen
+        setLocationRelativeTo(null);
+        
         //Set background color for elements
         getContentPane().setBackground(Color.decode("#ACE1AF"));
         txtareaQuestion.setBackground(Color.decode("#ACE1AF"));
@@ -51,7 +60,9 @@ public class QuizGUI extends javax.swing.JFrame {
         Answer ansD = question.getAnswers()[3];
 
         //Load question and answers into gui
-        lblQuestionTitle.setText("Question " + question.getNumber() + ": ");
+        lblQuestionTitle.setText("Question " + question.getNumber() + "/" + quiz.questionList.length + ": ");
+        //load section
+        lblSection.setText(question.getSection());
         txtareaQuestion.setText(question.getText());
         radAnswerA.setText(ansA.getText());
         radAnswerB.setText(ansB.getText());
@@ -93,6 +104,8 @@ public class QuizGUI extends javax.swing.JFrame {
         lblImg = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtareaQuestion = new javax.swing.JTextArea();
+        lblSectionTitle = new javax.swing.JLabel();
+        lblSection = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quiz");
@@ -150,14 +163,21 @@ public class QuizGUI extends javax.swing.JFrame {
         lblImg.setText("Image here");
 
         txtareaQuestion.setEditable(false);
-        txtareaQuestion.setColumns(2);
+        txtareaQuestion.setColumns(1);
         txtareaQuestion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtareaQuestion.setLineWrap(true);
         txtareaQuestion.setRows(2);
+        txtareaQuestion.setText("question here");
         txtareaQuestion.setWrapStyleWord(true);
         txtareaQuestion.setAutoscrolls(false);
         txtareaQuestion.setFocusable(false);
         jScrollPane1.setViewportView(txtareaQuestion);
+
+        lblSectionTitle.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblSectionTitle.setText("Section");
+
+        lblSection.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblSection.setText("Section title");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -168,16 +188,6 @@ public class QuizGUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(226, 226, 226)
                         .addComponent(lblImg, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addComponent(lblQuestionTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addComponent(lblAnswerA, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(radAnswerA, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(92, 92, 92)
                         .addComponent(lblAnswerB, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,10 +205,25 @@ public class QuizGUI extends javax.swing.JFrame {
                         .addComponent(radAnswerD, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(322, 322, 322)
-                        .addComponent(btnNextQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(51, Short.MAX_VALUE))
+                        .addComponent(btnNextQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblAnswerA, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(radAnswerA, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblQuestionTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblSectionTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblSection, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(64, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42))
         );
@@ -207,11 +232,15 @@ public class QuizGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addComponent(lblImg, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSectionTitle)
+                    .addComponent(lblSection))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblQuestionTitle)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblAnswerA)
                     .addComponent(radAnswerA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -235,7 +264,7 @@ public class QuizGUI extends javax.swing.JFrame {
                     .addComponent(radAnswerD))
                 .addGap(18, 18, 18)
                 .addComponent(btnNextQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
@@ -285,7 +314,9 @@ public class QuizGUI extends javax.swing.JFrame {
                     System.out.println("Error in getting image: " + e);
                 }
 
-                lblQuestionTitle.setText("Question " + question.getNumber() + ": ");
+                lblQuestionTitle.setText("Question " + question.getNumber() + "/" + quiz.questionList.length + ": ");
+                //load section
+                lblSection.setText(question.getSection());
                 txtareaQuestion.setText(question.getText());
                 //Clear previous selection
                 btnGroupAnswers.clearSelection();
@@ -297,12 +328,8 @@ public class QuizGUI extends javax.swing.JFrame {
             }else{
                 //Call to the results form (Maks results form)
                 
-                //Display the results for now in console.
-                System.out.println(quiz.userAnswers.size());
-                for(int i=0; i<quiz.userAnswers.size(); i++)
-                {
-                    System.out.println("Question " + i + ": Answer " + quiz.userAnswers.get(i) );
-                }
+                //Calculate score
+                System.out.println("The final score is: " + quiz.calculateScore());
             }
         }
     }//GEN-LAST:event_btnNextQuestionActionPerformed
@@ -359,6 +386,8 @@ public class QuizGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lblAnswerD;
     private javax.swing.JLabel lblImg;
     private javax.swing.JLabel lblQuestionTitle;
+    private javax.swing.JLabel lblSection;
+    private javax.swing.JLabel lblSectionTitle;
     private javax.swing.JRadioButton radAnswerA;
     private javax.swing.JRadioButton radAnswerB;
     private javax.swing.JRadioButton radAnswerC;
